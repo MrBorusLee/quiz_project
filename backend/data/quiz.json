@@ -1,0 +1,43 @@
+[
+  {
+    "id": 1,
+    "question": "Are you hungry?",
+    "answers": [
+      {"id": 1, "answer": "Yes", "next_question": 2},
+      {"id": 2, "answer": "No", "next_question": 5}
+    ]
+  },
+  {
+    "id": 2,
+    "question": "What are you going to eat?",
+    "answers": [
+      {"id": 3, "answer": "Pizza", "next_question": 3},
+      {"id": 4, "answer": "Pasta", "next_question": 4},
+      {"id": 5, "answer": "French fries", "next_question": 5},
+      {"id": 6, "answer": "I changed my mind", "next_question": 1}
+    ]
+  },{
+    "id": 3,
+    "question": "Which kind of pizza would you like to eat?",
+    "answers": [
+      {"id": 7, "answer": "Peperoni", "next_question": 5},
+      {"id": 8, "answer": "4 cheeses", "next_question": 5},
+      {"id": 9, "answer": "Meat", "next_question": 5}
+    ]
+  },{
+    "id": 4,
+    "question": "Which kind of pasta would you like to eat?",
+    "answers": [
+      {"id": 10, "answer": "Сarbonara", "next_question": 5},
+      {"id": 11, "answer": "Meatballs", "next_question": 5}
+    ]
+  },{
+    "id": 5,
+    "question": "Thank you for order",
+    "answers": []
+  },{
+    "id": 6,
+    "question": "Bye, come back later",
+    "answers": []
+  }
+]
