@@ -1,8 +1,8 @@
 from collections import namedtuple
+from pathlib import Path
 import json
 import os
 import reprlib
-from pathlib import Path
 
 from django.conf import settings
 
@@ -53,6 +53,10 @@ class Quiz:
         return self.get_question()
 
     def construct_history(self, question_answer_list: list):
+        """Taking list of question - answer id pairs and returning human representation in form
+           Q: A -> ... -> Q: A
+        """
+
         question_answer = []
         for qa in question_answer_list:
             q_id, a_id = qa

@@ -1,11 +1,12 @@
 import logging
+
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
-from apps.api.serializers import QuestionSerializer, QuestionAnswerSerializer
+from .serializers import QuestionSerializer, QuestionAnswerSerializer
 from .quiz import Quiz, QuestionDoesNotExists
 
 logger = logging.getLogger(__name__)
@@ -17,7 +18,7 @@ class QuestionsViewSet(ViewSet):
         super().__init__(*args, **kwargs)
         self.objects = Quiz()
 
-    def retrieve(self, request, **kwargs):
+    def retrieve(self, request: Request, **kwargs):
         try:
             question = self.objects.get_question(int(kwargs['pk']))
         except QuestionDoesNotExists:
@@ -25,12 +26,14 @@ class QuestionsViewSet(ViewSet):
         return Response(data=QuestionSerializer(instance=question).data)
 
     @action(detail=False)
-    def first(self, request):
+    def first(self, request: Request):
         question = self.objects.get_initial_question()
         return Response(data=QuestionSerializer(instance=question).data)
 
     @action(detail=False, methods=['post'])
     def finish_quiz(self, request: Request):
+        """Gets quiz history from frontend and logs it"""
+
         serializer = QuestionAnswerSerializer(data=request.data, many=True)
         if serializer.is_valid():
             q_a_list = [(item['question_id'], item['answer_id']) for item in serializer.data]
