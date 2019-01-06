@@ -97,15 +97,6 @@ LOGGING = {
         'default': {
             'format': '%(asctime)s %(levelname)-8s %(name)-5s %(message)s',
             'datefmt': '%Y-%m-%d %H:%M:%S'
-        },
-        'fluent_fmt': {
-            '()': 'fluent.handler.FluentRecordFormatter',
-            'format': {
-                'level': '%(levelname)s',
-                'hostname': '%(hostname)s',
-                'action_time': '%(asctime)s',
-                'request_id': '%(request_id)s',
-            }
         }
     },
     'handlers': {
@@ -115,36 +106,10 @@ LOGGING = {
             'formatter': 'default',
             'stream': 'ext://sys.stdout'
         },
-        'fluent-audit': {
-            'class': 'fluent.handler.FluentHandler',
-            'host': 'logs',
-            'port': 24224,
-            'tag': 'deep.audit',
-            'formatter': 'fluent_fmt',
-            'level': 'DEBUG',
-        },
-        'fluent': {
-            'class': 'fluent.handler.FluentHandler',
-            'host': 'logs',
-            'port': 24224,
-            'tag': 'deep.api',
-            'formatter': 'fluent_fmt',
-            'level': 'DEBUG',
-        },
         'none': {'class': 'logging.NullHandler'}
     },
     'loggers': {
         'conf': {'handlers': ['none'], 'propagate': False},
-        'audit': {
-            'handlers': ['fluent-audit'],
-            'level': 'DEBUG',
-            'propagate': False
-        },
-        'api': {
-            'handlers': ['fluent'],
-            'level': 'DEBUG',
-            'propagate': False
-        },
         '': {
             'handlers': ['console'],
             'level': 'DEBUG',
